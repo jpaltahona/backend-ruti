@@ -1,7 +1,7 @@
 
 import { User } from 'src/users/user.entity'
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-User
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
+
 
 @Entity({ name: 'routes' })
 export class Route {
@@ -35,7 +35,7 @@ export class Route {
     @Column()
     Y_COORD: string
 
-    @OneToMany(() => User, user => user.ruta)
-    users: User[];
+    @ManyToOne(() => User, user => user.routerId)
+    users: User;
 
 }

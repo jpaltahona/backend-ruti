@@ -20,10 +20,10 @@ export class User {
     @Column({type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     createAt: Date
 
-    @Column()
-    routes: number;
+    @Column({ nullable: true })
+    routerId: number;
 
-    @OneToMany( () => Route, route => route.id)
+    @OneToMany( () => Route, route => route.users)
     ruta: Route[]
 
 }

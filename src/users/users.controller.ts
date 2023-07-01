@@ -22,5 +22,9 @@ export class UsersController {
     getUser( @Param('id', ParseIntPipe) id:number){
         return this.userService.getUser(id)
     }
-    
+    @Post('/favorite/:id')
+    addFavoriteRoute( @Param('id', ParseIntPipe) id:number, @Body() routeFav){
+        const addFav = this.userService.updateUserWithRoutes(id, routeFav)
+        return this.userService.getUser(id)
+    }
 }
