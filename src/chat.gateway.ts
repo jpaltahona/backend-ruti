@@ -19,7 +19,6 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     handleDisconnect(client: any) {
         console.log('alguien se desconecto ->', client)
     }
-
     
     @SubscribeMessage('message')
     handleMessage(@MessageBody() message: string): void {
