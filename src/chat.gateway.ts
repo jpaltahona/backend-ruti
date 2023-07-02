@@ -1,7 +1,9 @@
 import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets";
 
+
 @WebSocketGateway(81, {
-    cors: { origin: '*' }
+    cors: { origin: '*' },
+    namespace: 'events'
 })
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
   @WebSocketServer() server;
@@ -21,6 +23,6 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     
     @SubscribeMessage('message')
     handleMessage(@MessageBody() message: string): void {
-        this.server.emit('message', message);
+        this.server.emit('events', message);
     }
 }
