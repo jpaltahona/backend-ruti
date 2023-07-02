@@ -48,7 +48,7 @@ export class UsersService {
     }
 
     async updateUserWithRoutes(userId: number, routeIds){
-        console.log(routeIds)
+    
         const user = await this.useRepository.findOne({ 
             where: {
                 id: userId
@@ -59,14 +59,13 @@ export class UsersService {
         if (!user) {
             return new HttpException('user not found', HttpStatus.NOT_FOUND)
         }
-       
-        //console.log(user.routes)
+
         const routesToAdd = await this.rutaRepository.findOneById(routeIds);
         if(!routesToAdd){
             return new HttpException('route not found', HttpStatus.NOT_FOUND)
         }
        
-        user.ruta = [];
+        user.ruta = [...user.ruta];
         user.ruta.push(routesToAdd);
       
         Object.assign(user, user);
