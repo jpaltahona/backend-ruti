@@ -7,7 +7,7 @@ interface bodyRes {
 }
 
 
-@WebSocketGateway(3001, {
+@WebSocketGateway(8001, {
     cors: { origin: '*' },
 })
 export class MyGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
@@ -18,36 +18,35 @@ export class MyGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayD
     ){}
     
     afterInit(server: any) {
-        console.log('Esto se ejecuta cuando inicia')
-      }
+      //console.log('Esto se ejecuta cuando inicia')
+    }
     
-      handleConnection(client: any, ...args: any[]) {
-        console.log('Hola alguien se conecto al socket 👌👌👌');
-      }
-    
-      handleDisconnect(client: any) {
-        console.log('ALguien se fue! chao chao')
-      }
-    
-    
-      @SubscribeMessage('event_join')
-      handleJoinRoom(client: any, room: string) {
-        console.log('suscrito --> ', room);
-        client.join(`room_${room}`);
-      }
-    
-      @SubscribeMessage('event_message') //TODO Backend
-      async handleIncommingMessage( client: any,
-        payload: { room: string; message: string },
-      ) {
-        const { room, message } = payload;
-        const list = await this.gatewayService.getInfoVehicle(message)
-        this.server.to(`room_${room}`).emit('new_message',list);
-      }
-    
-      @SubscribeMessage('event_leave')
-      handleRoomLeave(client: any, room:string) {
-        console.log(`chao room_${room}`)
-        client.leave(`room_${room}`);
-      }
+    handleConnection(client: any, ...args: any[]) {
+      //console.log('Hola alguien se conecto al socket 👌👌👌');
+    }
+  
+    handleDisconnect(client: any) {
+      //console.log('ALguien se fue! chao chao')
+    }
+  
+    @SubscribeMessage('event_join')
+    handleJoinRoom(client: any, room: string) {
+      //console.log('suscrito --> ', room);
+      //client.join(`room_${room}`);
+    }
+  
+    @SubscribeMessage('event_message') //TODO Backend
+    async handleIncommingMessage( client: any,
+      payload: { room: string; message: string },
+    ) {
+      const { room, message } = payload;
+      const list = await this.gatewayService.getInfoVehicle(message)
+      this.server.to(`room_${room}`).emit('new_message',list);
+    }
+  
+    @SubscribeMessage('event_leave')
+    handleRoomLeave(client: any, room:string) {
+      //console.log(`chao room_${room}`)
+      client.leave(`room_${room}`);
+    }
 }
