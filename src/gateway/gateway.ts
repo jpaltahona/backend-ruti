@@ -7,7 +7,7 @@ interface bodyRes {
 }
 
 
-@WebSocketGateway(3003, {
+@WebSocketGateway(3004, {
     cors: { origin: '*' },
 })
 export class MyGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
