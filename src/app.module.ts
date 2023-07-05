@@ -7,7 +7,7 @@ import { RoutesModule } from './routes/routes.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { AppInfoModule } from './app-info/app-info.module';
 import { config, configDev } from './config';
-const devMode = true;
+const devMode = false;
 const configTipe = devMode ? configDev : config;
 
 @Module({
