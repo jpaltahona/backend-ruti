@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { RoutesModule } from './routes/routes.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { AppInfoModule } from './app-info/app-info.module';
+import { config } from './config';
 
 
 @Module({
@@ -14,9 +15,9 @@ import { AppInfoModule } from './app-info/app-info.module';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
-      password: '1234',
-      database: 'ruti',
+      username: config.DB_USER,
+      password: config.DB_PASSWORD,
+      database: config.PRODUCTION_DB,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true
     }),
